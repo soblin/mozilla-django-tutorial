@@ -60,6 +60,11 @@ class BookInstance(models.Model):
         help_text='Book availability',
     )
 
+    def get_status_display(self):
+        return self.status
+
+    get_status_display.short_description = 'Status'
+    
     class Meta:
         ordering = ['due_back']
         permissions = (("can_marked_returned", "Set book as returned"),)
