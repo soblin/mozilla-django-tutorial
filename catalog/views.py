@@ -41,6 +41,13 @@ class BookListView(generic.ListView):
 class BookDetailView(generic.DetailView):
     model = Book
 
+class AuthorListView(generic.ListView):
+    model = Author
+    paginate_by = 10
+
+class AuthorDetailView(generic.DetailView):
+    model = Author
+
 class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
     model = BookInstance
     template_name = 'catalog/bookinstance_list_borrowed_user.html'
@@ -82,7 +89,7 @@ def renew_book_librarian(request, pk):
 
         return render(request, 'catalog/book_renew_librarian.html', context)
 
-class AuthorCreate(CreateVieww):
+class AuthorCreate(CreateView):
     model = Author
     fields = ['first_name', 'last_name', 'date_of_birth', 'date_of_death']
     initial = {'date_of_birth': '11/06/2020'}
